@@ -6,6 +6,9 @@ class SicknessController {
             where: {id: req.user.id},
             include: {
                 model: Sickness
+            },
+            attributes : {
+                exclude: [`password`]
             }
         })
         .then(data => {
@@ -26,7 +29,7 @@ class SicknessController {
             ranking, 
             specialisation 
         } = req.body
-        Sickness.create({
+        Sicknfess.create({
             name,
             profName,
             icdName,
@@ -39,7 +42,13 @@ class SicknessController {
             res.status(201).json(data)
         })
         .catch(err => {
-            next(err.message)
+            if (err.name === `SequelizeValidationError`) {
+                next(err)
+            } else if (err.name === `SequelizeUniqueConstraintError`) {
+                next(err.message)
+            } else {
+                next(err.message)
+            }
         })
     }
 }

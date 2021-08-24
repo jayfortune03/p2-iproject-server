@@ -15,13 +15,62 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Sickness.init({
-    name: DataTypes.STRING,
-    profName: DataTypes.STRING,
-    icdName: DataTypes.STRING,
-    accuracy: DataTypes.INTEGER,
-    ranking: DataTypes.INTEGER,
-    specialisation: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Name cannot be empty`
+        }
+      }
+    },
+    profName: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `profName cannot be empty`
+        }
+      }
+    },
+    icdName: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Icd Name cannot be empty`
+        }
+      }
+    },
+    accuracy: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: `Accuracy cannot be empty`
+        }
+      }
+    },
+    ranking: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: `Ranking cannot be empty`
+        }
+      }
+    },
+    specialisation: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Specialisation cannot be empty`
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: `UserId cannot be empty`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Sickness',
