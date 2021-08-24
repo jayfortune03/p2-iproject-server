@@ -16,19 +16,57 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    firstName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `First Name cannot be empty`
+        }
+      }
+    },
     lastName: DataTypes.STRING,
-    gender: DataTypes.STRING,
-    dateOfBirth: DataTypes.DATE,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    gender: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Gender Name cannot be empty`
+        }
+      }
+    },
+    dateOfBirth: {
+      type: DataTypes.DATE,
+      validate: {
+        notEmpty: {
+          msg: `Date Of Birth cannot be empty`
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Email cannot be empty`
+        },
+        isEmail: {
+          msg: `Email must be in email format!`
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: `Password cannot be empty`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',
     hooks: {
       beforeCreate(instance, _) {
-        if (instance.last_name === ``) {
-          instance.last_name = instance.first_name
+        if (instance.lastName === ``) {
+          instance.lastName = instance.firstName
         }
         instance.password = hashPassword(instance.password)
       }
