@@ -1,8 +1,8 @@
 const router = require(`express`).Router()
-const SicknessController = require(`../controllers/userController`)
-// const {errorHandler} = require(`../middlewares/errorHandler`)
-// const { authentication } = require(`../middlewares/authentication`)
+const SicknessController = require(`../controllers/sicknessController`)
+// // const {errorHandler} = require(`../middlewares/errorHandler`)
+// // const { authentication } = require(`../middlewares/authentication`)
 
-// router.get(`/`, SicknessController.getSickness)
+router.post(`/user/sickness`, SicknessController.postSickness)
 
 module.exports = router

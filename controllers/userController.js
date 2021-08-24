@@ -1,4 +1,4 @@
-const { User, UserSickness } = require(`../models`)
+const { User, Sickness } = require(`../models`)
 const { checkPassword } = require(`../helpers/bcrypt`)
 const { signToken } = require(`../helpers/jwt`)
 
@@ -50,15 +50,28 @@ class UserController {
         })
     }
 
-    static getSickness(req, res, next) {
-        UserSickness.findAll({
-            order: [[`id`, `ASC`]]
+    static postSickness(req, res, next) {
+        Sickness.create({
+
+        })
+    }
+
+    static getSicknessHistory(req, res, next) {
+        User.findOne({
+            where: {id: 3},
+            include: {
+                model: Sickness
+            },
+            attributes: {
+                exclude: [`password`, `updatedAt`]
+            }
         })
         .then(data => {
             res.status(200).json(data)
         })
         .catch(err => {
-            res.status(500).json(err)
+            // res.status(500).json(err)
+            console.log(err)
         })
     }
 }
