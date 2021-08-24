@@ -1,10 +1,10 @@
 const router = require(`express`).Router()
 const sickness = require(`./sicknessRouter`)
 const user = require(`./userRouter`)
-const googleAuth = require(`./googleRouter`)
+const symptom = require(`./symptomRouter`)
 
 router.use(`/`, user)
-router.use(`/`, googleAuth)
 router.use(`/`, sickness)
+router.use(`/`, symptom)
 
 module.exports = router
