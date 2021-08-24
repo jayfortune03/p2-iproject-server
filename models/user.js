@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     hooks: {
       beforeCreate(instance, _) {
+        if (instance.last_name === ``) {
+          instance.last_name = instance.first_name
+        }
         instance.password = hashPassword(instance.password)
       }
     }
