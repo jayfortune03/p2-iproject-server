@@ -31,6 +31,12 @@ function errorHandler(err, req, res, next) {
             return el.message
         })
         code = 400
+    } else if (err === `invalid token`) {
+        code = 400
+        message = `You are unauthorized`
+    } else if (err === `jwt must be provided`) {
+        code = 400
+        message = `Invalid token!`
     } else {
         message = `Internal server error`
         code = 500
