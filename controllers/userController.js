@@ -17,14 +17,13 @@ class UserController {
             res.status(201).json({id : data.id, email: data.email})
         })
         .catch(err => {
-            console.log(err)
-            // if (err.errors[0].message === `Password must be more than 5 characters!`) {
-            //     next(err.errors[0].message)
-            // } else if (err.errors[0].message === `Email must be in email format!`) {
-            //     next(err.errors[0].message)
-            // } else {
-            //     next(err.name)
-            // }
+            if (err.name === `SequelizeValidationError`) {
+                next(err)
+            } else if (err.name === `SequelizeUniqueConstraintError`) {
+                next(err.message)
+            } else {
+                next(err.message)
+            }
         })
     }
 
@@ -39,39 +38,14 @@ class UserController {
                     const access_token = signToken({id : data.id, email: data.email, role: data.role})
                     res.status(200).json({access_token})
                 } else {
-                    throw ({name : `Invalid Username or Email or Password!`})
+                    throw ({message : `Invalid Username or Email or Password!`})
                 }
             } else {
-                throw ({name : `Invalid Username or Email or Password!`})
+                throw ({message : `Invalid Username or Email or Password!`})
             }
         })
         .catch(err => {
-            next(err.name)
-        })
-    }
-
-    static postSickness(req, res, next) {
-        Sickness.create({
-
-        })
-    }
-
-    static getSicknessHistory(req, res, next) {
-        User.findOne({
-            where: {id: 3},
-            include: {
-                model: Sickness
-            },
-            attributes: {
-                exclude: [`password`, `updatedAt`]
-            }
-        })
-        .then(data => {
-            res.status(200).json(data)
-        })
-        .catch(err => {
-            // res.status(500).json(err)
-            console.log(err)
+            next(err.message)
         })
     }
 }
