@@ -32,11 +32,29 @@ function errorHandler(err, req, res, next) {
         })
         code = 400
     } else if (err === `invalid token`) {
-        code = 400
+        code = 401
         message = `You are unauthorized`
     } else if (err === `jwt must be provided`) {
-        code = 400
+        code = 401
         message = `Invalid token!`
+    }  else if (err === `null value in column "name" violates not-null constraint`) {
+        code = 400
+        message = `Name cannot be null`
+    } else if (err === `null value in column "profName" violates not-null constraint`) {
+        code = 400
+        message = `profName cannot be null`
+    } else if (err === `null value in column "icdName" violates not-null constraint`) {
+        code = 400
+        message = `icdName cannot be null`
+    } else if (err === `null value in column "accuracy" violates not-null constraint`) {
+        code = 400
+        message = `Accuracy cannot be null`
+    } else if (err === `null value in column "ranking" violates not-null constraint`) {
+        code = 400
+        message = `Ranking cannot be null`
+    } else if (err === `null value in column "specialisation" violates not-null constraint`) {
+        code = 400
+        message = `Specialisation cannot be null`
     } else {
         message = `Internal server error`
         code = 500
