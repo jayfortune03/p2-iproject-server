@@ -28,6 +28,22 @@ module.exports = {
         allowNull:false,
         type: Sequelize.STRING
       },
+      ranking: {
+        allowNull:false,
+        type: Sequelize.INTEGER
+      },
+      UserId: {
+        allowNull:false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: `Users`
+          },
+          key: `id`,
+          onUpdate: `CASCADE`,
+          onDelete: `CASCADE`
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
