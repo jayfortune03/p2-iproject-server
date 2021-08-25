@@ -48,6 +48,22 @@ class UserController {
             next(err.message)
         })
     }
+
+    static getUserData(req, res, next) {
+        User.findOne({
+            where: {id: req.user.id},
+            attributes: {
+                exclude: [`password`]
+            },
+            include: {model: Sickness}
+        })
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            next(err.message)
+        })
+    }
 }
 
 module.exports = UserController
