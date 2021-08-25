@@ -245,10 +245,10 @@ _Response (500 - Internal server error)_
 ```
 
 
-### GET /user/sickness
+### GET /user
 
 ```http
-  GET /user/sickness
+  GET /user
 ```
 
 #### GET Sickness to registered User

@@ -1,25 +1,6 @@
 const { User, Sickness } = require(`../models`)
 
 class SicknessController {
-    static getSickness(req, res, next) {
-        User.findOne({
-            where: {id: req.user.id},
-            include: {
-                model: Sickness
-            },
-            attributes : {
-                exclude: [`password`]
-            }
-        })
-        .then(data => {
-            res.status(200).json(data)
-        })
-
-        .catch(err => {
-            next(err.message)
-        })
-    }
-
     static postSickness(req, res, next) {
         const { 
             name, 
@@ -29,7 +10,7 @@ class SicknessController {
             ranking, 
             specialisation 
         } = req.body
-        Sicknfess.create({
+        Sickness.create({
             name,
             profName,
             icdName,
